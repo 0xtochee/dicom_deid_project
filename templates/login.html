@@ -1,0 +1,41 @@
+<!-- templates/login.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='auth.css') }}">
+  <style>
+    .flash {
+      color: red;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="auth-container">
+    <div class="auth-image">
+      <img src="{{ url_for('static', filename='assets/signup_illustration.png') }}" alt="Illustration">
+    </div>
+    <form class="auth-form" method="POST" action="/login">
+      <h2>Sign in</h2>
+
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <div class="flash">
+            {% for message in messages %}
+              {{ message }}
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+
+      <input type="text" name="username" placeholder="Username" required />
+      <input type="password" name="password" placeholder="Password" required />
+      <button type="submit">Sign in</button>
+      <p>Don't have an account? <a href="/signup">Sign up</a></p>
+    </form>
+  </div>
+</body>
+</html>

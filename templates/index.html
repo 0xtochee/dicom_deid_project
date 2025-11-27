@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>DICOM De-identifier</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Cornerstone stack -->
+  <script src="https://unpkg.com/cornerstone-core@2.6.0/dist/cornerstone.min.js"></script>
+  <script src="https://unpkg.com/cornerstone-math@0.1.8/dist/cornerstoneMath.min.js"></script>
+  <script src="https://unpkg.com/dicom-parser@1.8.11/dist/dicomParser.min.js"></script>
+  <script src="https://unpkg.com/cornerstone-wado-image-loader@4.6.0/dist/cornerstoneWADOImageLoader.bundle.min.js"></script>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1>DICOM De-identifier</h1>
+      <div class="uploader">
+        <input type="file" id="fileInput" accept=".dcm" />
+        <button id="uploadBtn"><i class="fa fa-upload"></i> Upload</button>
+      </div>
+    </header>
+
+    <!-- Top viewers: Original -->
+    <section class="viewer-row">
+      <div class="viewer-col">
+        <h2>Original Image</h2>
+        <div id="viewer-original" class="dicom-viewer"></div>
+        <div class="controls">
+          <button data-target="viewer-original" data-action="zoom-in">+</button>
+          <button data-target="viewer-original" data-action="zoom-out">−</button>
+          <button data-target="viewer-original" data-action="reset">Reset</button>
+          <button data-target="viewer-original" data-action="fit">Fit</button>
+        </div>
+      </div>
+      <div class="viewer-col">
+        <h2>Original Metadata</h2>
+        <div id="metadata-original" class="metadata"></div>
+      </div>
+    </section>
+
+    <!-- Results table -->
+    <section class="results">
+      <table>
+        <thead>
+          <tr>
+            <th>Filename</th>
+            <th>Status</th>
+            <th>Download</th>
+            <th>View</th>
+          </tr>
+        </thead>
+        <tbody id="resultsBody"></tbody>
+      </table>
+    </section>
+
+    <!-- Bottom viewers: Processed -->
+    <section class="viewer-row">
+      <div class="viewer-col">
+        <h2>Processed Image</h2>
+        <div id="viewer-processed" class="dicom-viewer"></div>
+        <div class="controls">
+          <button data-target="viewer-processed" data-action="zoom-in">+</button>
+          <button data-target="viewer-processed" data-action="zoom-out">−</button>
+          <button data-target="viewer-processed" data-action="reset">Reset</button>
+          <button data-target="viewer-processed" data-action="fit">Fit</button>
+        </div>
+      </div>
+      <div class="viewer-col">
+        <h2>Processed Metadata</h2>
+        <div id="metadata-processed" class="metadata"></div>
+      </div>
+    </section>
+  </div>
+
+  <div id="snackbar" class="snackbar"></div>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
