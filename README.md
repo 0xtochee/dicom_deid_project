@@ -4,6 +4,13 @@ A Python + Flask pipeline that de-identifies medical DICOM files on two fronts a
 
 Built as a privacy-engineering project aligned with HIPAA Safe Harbor and NDPR de-identification expectations: the goal is that no protected health information survives in either the header **or** the pixels.
 
+## Before & After
+
+![Original DICOM with burned-in patient text](screenshots/before-processing.png)
+![De-identified output — text removed, metadata stripped](screenshots/after-processing.png)
+
+Sample image from a public test dataset; no real patient data.
+
 ## Highlights / Features
 
 - Two-stage de-identification: DICOM tag anonymization + burned-in pixel text removal in a single pass.
